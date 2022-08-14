@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  detalhador-de-chamados:
+    image: bigode73/detalhador-de-chamados
+    env_file: stack.env
+    container_name: detalhador-de-chamados
+    ports:
+      - ${APP_PORT_DETALHADOR}:${APP_PORT_DETALHADOR}
+    depends_on:
+      - db
+      
+  gestor-de-usuarios:
+    container_name: gestor-de-usuarios
+    image: bigode73/gestor-de-usuarios
+    env_file: stack.env
+    ports:
+      - ${APP_PORT_GESTOR}:${APP_PORT_GESTOR}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.2-alpine
+    container_name: db
+    env_file: stack.env
+    volumes:
+      - /home/ubuntu/2022-1-schedula-deploy/database:/docker-entrypoint-initdb.d
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+
+networks:
+  default:
+    external:
+      name: schedula-network
