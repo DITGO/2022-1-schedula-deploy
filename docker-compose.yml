@@ -18,7 +18,15 @@ services:
       - ${APP_PORT_GESTOR}:${APP_PORT_GESTOR}
     depends_on:
       - db
-
+      
+  gerenciador-de-localidades:
+    container_name: gerenciador-de-localidades
+    image: bigode73/gerenciador-de-localidades
+    env_file: stack.env
+    ports:
+      - ${APP_PORT_GERENCIADOR_LOCALIDADES}:${APP_PORT_GERENCIADOR_LOCALIDADES}
+    depends_on:
+      - db
   db:
     image: postgres:13.2-alpine
     container_name: db
