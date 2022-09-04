@@ -17,7 +17,7 @@ CREATE TABLE "public"."workstation" (
     city_id INTEGER NOT NULL,
     ip VARCHAR(250),
     link VARCHAR(250),
-    asdl_vpn BOOLEAN NOT NULL DEFAULT FALSE,
+    adsl_vpn BOOLEAN NOT NULL DEFAULT FALSE,
     regional BOOLEAN NOT NULL DEFAULT FALSE,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     regional_id INTEGER,
@@ -32,7 +32,7 @@ CREATE TABLE "public"."workstation" (
 
 CREATE TABLE "public"."phone" (
     workstation_id INTEGER NOT NULL,
-    number VARCHAR(250) NOT NULL,
+    number VARCHAR(20) NOT NULL,
     CONSTRAINT "phone_workstation_id_fkey" FOREIGN KEY (workstation_id) 
     REFERENCES "public"."workstation" (id) 
     ON DELETE CASCADE
